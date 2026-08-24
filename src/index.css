@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+:root {
+  --curtain-dark: #013D2E;
+  --curtain-mid: #064F3C;
+  --curtain-light: #086B50;
+  --curtain-highlight: #0B7A5A;
+  --gold-primary: #D4AF37;
+  --gold-secondary: #E7C65C;
+  --bg-dark: #011F19;
+}
+
+html,
+body,
+#root {
+  width: 100vw;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: fixed;
+  overscroll-behavior: none;
+  background-color: var(--bg-dark);
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  /* Prevent text selection */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Base reset for images */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+@keyframes silkFloat {
+  0% { background-position-x: 0vw; }
+  100% { background-position-x: 12vw; }
+}
+
+.floating-silk {
+  animation: silkFloat 6s linear infinite;
+}
+
+.fabric-texture {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Responsive Image Reveal Layout */
+.image-reveal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 2vh 1vw;
+}
+
+.image-reveal-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2vw;
+  width: 100%;
+}
+
+.ceremonial-image {
+  object-fit: contain;
+  width: auto;
+  height: auto;
+  max-width: 31vw;
+  max-height: 80vh;
+  border: 2px solid rgba(212, 175, 55, 0.6);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(212, 175, 55, 0.15);
+  border-radius: 4px;
+  /* Prevent animation glitching/flickering */
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Tablet (Portrait) */
+@media (max-width: 900px) and (orientation: portrait) {
+  .image-reveal-container {
+    gap: 1.5vh;
+  }
+  .image-reveal-row {
+    flex-direction: column;
+    gap: 1.5vh;
+  }
+  .ceremonial-image {
+    max-width: 90vw;
+    max-height: 31vh;
+  }
+}
+
+/* Mobile (Portrait) */
+@media (max-width: 600px) and (orientation: portrait) {
+  .image-reveal-container {
+    padding: 1vh 2vw;
+  }
+  .image-reveal-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1vh;
+  }
+  .ceremonial-image {
+    max-width: 96vw;
+    max-height: 31vh;
+  }
+}
+
+/* Projector / Ultrawide */
+@media (min-width: 1800px) {
+  .ceremonial-image {
+    max-width: 31vw;
+    max-height: 80vh;
+  }
+}
