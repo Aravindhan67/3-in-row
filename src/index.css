@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;500;700&display=swap');
 
 :root {
-  --curtain-dark: #2C0505;
-  --curtain-mid: #4A0B0B;
-  --curtain-light: #6E1212;
-  --curtain-highlight: #941B1B;
+  --curtain-dark: #022B17;
+  --curtain-mid: #054F2C;
+  --curtain-light: #097542;
+  --curtain-highlight: #0F9C59;
   --gold-primary: #FFD700;
   --gold-secondary: #F3A953;
   --bg-dark: #1A0202;
