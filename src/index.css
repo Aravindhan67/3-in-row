@@ -7,7 +7,7 @@
   --curtain-highlight: #0F9C59;
   --gold-primary: #FFD700;
   --gold-secondary: #F3A953;
-  --bg-dark: #1A0202;
+  --bg-dark: #000000;
 }
 
 html,
@@ -69,7 +69,7 @@ img {
 
 .top-logo {
   position: absolute;
-  top: 4vh;
+  top: -3vh;
   left: 50%;
   transform: translateX(-50%);
   max-height: 25vh;

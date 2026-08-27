@@ -144,8 +144,7 @@ const CurtainOpening: React.FC<CurtainOpeningProps> = ({ isOpening, onComplete, 
     position: 'absolute',
     top: 0, left: 0, right: 0, bottom: 0,
     background: `
-      linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 10%, transparent 75%, rgba(0,0,0,0.85) 100%),
-      radial-gradient(circle at center 40%, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.4) 100%)
+      linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 10%)
     `,
     pointerEvents: 'none'
   };
@@ -176,7 +175,7 @@ const CurtainOpening: React.FC<CurtainOpeningProps> = ({ isOpening, onComplete, 
         style={{
           ...curtainStyleBase,
           left: 0,
-          borderRight: '15px solid rgba(0,0,0,0.6)', // Center split seam
+          borderRight: '15px solid rgba(0,0,0,0.15)', // Center split seam
           transformOrigin: 'top left',
         }}
       >
@@ -193,7 +192,7 @@ const CurtainOpening: React.FC<CurtainOpeningProps> = ({ isOpening, onComplete, 
         style={{
           ...curtainStyleBase,
           right: 0,
-          borderLeft: '15px solid rgba(0,0,0,0.6)', // Center split seam
+          borderLeft: '15px solid rgba(0,0,0,0.15)', // Center split seam
           transformOrigin: 'top right',
         }}
       >
