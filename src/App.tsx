@@ -27,8 +27,8 @@ function App() {
       audio.play().then(() => {
         // If auto-play actually succeeds (rare), we can skip the interceptor
         setHasInteracted(true);
-      }).catch((err) => {
-        console.warn("Browser blocked auto-play on load. A click is required.", err);
+      }).catch(() => {
+        // Silently catch browser autoplay restrictions
       });
     }
   }, []);
