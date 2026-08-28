@@ -55,7 +55,7 @@ const ImageReveal: React.FC<ImageRevealProps> = ({ isOpening }) => {
             }
           });
         }
-      }, 25000);
+      }, 12000);
       return () => clearTimeout(timer);
     } else if (currentIndex === 4) {
       // Fade in all 4 images
