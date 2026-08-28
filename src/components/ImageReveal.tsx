@@ -55,17 +55,39 @@ const ImageReveal: React.FC<ImageRevealProps> = ({ isOpening }) => {
             }
           });
         }
-      }, 12000);
+      }, 13000);
       return () => clearTimeout(timer);
     } else if (currentIndex === 4) {
-      // Fade in all 4 images
+      // Fade in all 4 images with a premium 3D entrance
       if (rowRef.current) {
         const children = rowRef.current.children;
+        
+        // 1. Grand 3D Reveal
         gsap.fromTo(
           children,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 1.5, stagger: 0.2, ease: 'power2.out' }
+          { opacity: 0, y: 80, scale: 0.7, rotationX: 25, rotationY: -15 },
+          { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1, 
+            rotationX: 0, 
+            rotationY: 0, 
+            duration: 2.5, 
+            stagger: 0.3, 
+            ease: 'expo.out' 
+          }
         );
+
+        // 2. Continuous elegant floating effect
+        gsap.to(children, {
+          y: '-=12',
+          duration: 3.5,
+          yoyo: true,
+          repeat: -1,
+          ease: 'sine.inOut',
+          stagger: 0.8,
+          delay: 2.5 // wait for reveal to finish
+        });
       }
     }
   }, [currentIndex]);

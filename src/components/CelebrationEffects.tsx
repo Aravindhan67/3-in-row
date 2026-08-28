@@ -21,7 +21,7 @@ const CelebrationEffects: React.FC<CelebrationEffectsProps> = ({ isActive }) => 
       particleContainer.style.pointerEvents = 'none';
       containerRef.current?.appendChild(particleContainer);
       
-      const numParticles = 400; // Reduced quantity for a more subtle cascade
+      const numParticles = 150; // Further reduced quantity for an even more subtle cascade
       for (let i = 0; i < numParticles; i++) {
         const particle = document.createElement('div');
         
@@ -62,7 +62,7 @@ const CelebrationEffects: React.FC<CelebrationEffectsProps> = ({ isActive }) => 
         const duration = 4 + Math.random() * 4; // Slow, elegant fall
         
         // Spread the spawn times continuously over the exact 8.5 seconds that the curtain is opening
-        const delay = Math.random() * 8.5; 
+        const delay = Math.random() * 7.5; 
         
         // 1. Fall downwards
         gsap.to(particle, {
