@@ -21,7 +21,7 @@ const CelebrationEffects: React.FC<CelebrationEffectsProps> = ({ isActive }) => 
       particleContainer.style.pointerEvents = 'none';
       containerRef.current?.appendChild(particleContainer);
       
-      const numParticles = 150; // Further reduced quantity for an even more subtle cascade
+      const numParticles = 200; // Further reduced quantity for an even more subtle cascade
       for (let i = 0; i < numParticles; i++) {
         const particle = document.createElement('div');
         
