@@ -55,7 +55,7 @@ function App() {
     <main 
       style={{ width: '100vw', height: '100dvh', overflow: 'hidden', position: 'relative' }}
     >
-      <audio id="bg-audio" autoPlay loop preload="auto" src="/kec.mp3.mpeg" />
+      <audio id="bg-audio" autoPlay loop preload="auto" src="/kec.mp3" />
 
       {/* Invisible overlay to capture the very first click and start the audio */}
       {!hasInteracted && (
