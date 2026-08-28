@@ -33,7 +33,7 @@ function App() {
     <main 
       style={{ width: '100vw', height: '100dvh', overflow: 'hidden', position: 'relative' }}
     >
-      <ImageReveal isComplete={isComplete} />
+      <ImageReveal isOpening={isOpening} />
       
       {/* Curtain is always in the DOM but animates out of view, we don't unmount it so the animation is smooth */}
       <CurtainOpening 

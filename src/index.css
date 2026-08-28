@@ -69,15 +69,15 @@ img {
 
 .top-logo {
   position: absolute;
-  top: 2vh;
+  top: 0; /* Pushed to the absolute top edge */
   left: 50%;
   transform: translateX(-50%);
-  max-height: 15vh;
-  max-width: 50vw;
+  max-height: 14vh; /* Adjusted height so it doesn't reach the plaque */
+  max-width: 55vw; /* Adjusted width */
   width: auto;
   height: auto;
   object-fit: contain;
-  z-index: 20;
+  z-index: 100;
 }
 
 .image-reveal-row {
@@ -87,7 +87,7 @@ img {
   align-items: center;
   gap: 2vw;
   width: 100%;
-  margin-top: 5vh; /* Push down slightly to avoid logo */
+  margin-top: -3vh; /* Shift slightly up to perfectly balance logo and tall footer */
 }
 
 .ceremonial-image {
@@ -104,6 +104,11 @@ img {
   backface-visibility: hidden;
 }
 
+.ceremonial-image.single-view {
+  max-width: 100vw; /* Make wider for single view */
+  max-height: 73vh; /* Increased height since footer is smaller */
+}
+
 /* Tablet (Portrait) */
 @media (max-width: 900px) and (orientation: portrait) {
   .image-reveal-container {
@@ -112,11 +117,15 @@ img {
   .image-reveal-row {
     flex-direction: column;
     gap: 1.5vh;
-    margin-top: 15vh;
+    margin-top: 2vh;
   }
   .ceremonial-image {
     max-width: 90vw;
     max-height: 20vh;
+  }
+  .ceremonial-image.single-view {
+    max-width: 90vw;
+    max-height: 40vh;
   }
 }
 
@@ -129,11 +138,15 @@ img {
     flex-direction: column;
     align-items: center;
     gap: 1vh;
-    margin-top: 10vh;
+    margin-top: 2vh;
   }
   .ceremonial-image {
     max-width: 96vw;
     max-height: 20vh;
+  }
+  .ceremonial-image.single-view {
+    max-width: 96vw;
+    max-height: 35vh;
   }
 }
 
@@ -162,8 +175,8 @@ img {
   font-weight: 700;
   letter-spacing: 0.5em;
   color: #3AA9D6;
-  font-size: 1.1rem;
-  margin-bottom: 0.8vh;
+  font-size: 0.8rem; /* Decreased a little bit */
+  margin-bottom: 0.5vh;
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   margin-left: 0.5em; /* compensate for letter spacing */
 }
@@ -172,7 +185,7 @@ img {
   display: flex;
   align-items: center;
   gap: 0;
-  margin-bottom: 1.5vh;
+  margin-bottom: 1vh;
   width: 20vw;
   min-width: 250px;
 }
@@ -208,10 +221,10 @@ img {
 
 .footer-title {
   font-family: 'Cinzel', serif;
-  font-size: 2.2rem;
+  font-size: 1.3rem; /* Decreased a little bit */
   letter-spacing: 0.1em;
   color: #D3D8DB;
-  margin-bottom: 2.5vh;
+  margin-bottom: 1.5vh;
   text-transform: uppercase;
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
@@ -219,7 +232,7 @@ img {
 .footer-subtitle-bar {
   width: 100%;
   background-color: #040d14;
-  padding: 1.5vh 0;
+  padding: 1vh 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -229,7 +242,7 @@ img {
 .footer-subtitle {
   font-family: 'Inter', serif;
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: 0.85rem; /* Decreased a little bit */
   color: #2D6B8C;
   letter-spacing: 0.08em;
   display: flex;

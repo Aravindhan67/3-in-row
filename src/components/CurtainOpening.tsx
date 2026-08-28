@@ -74,17 +74,17 @@ const CurtainOpening: React.FC<CurtainOpeningProps> = ({ isOpening, onComplete, 
         .to(qRight('.rope-seg-3'), { rotation: -5, duration: 0.5, ease: 'power2.out' }, 0.2)
         
         // 2. Pendulum Swing: Ropes swing back and forth while the curtain is opening
-        .to(qLeft('.rope-seg-1'), { rotation: 10, duration: 2.1, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 0.7)
-        .to(qLeft('.rope-seg-2'), { rotation: 5, duration: 2.1, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 0.7)
-        .to(qLeft('.rope-seg-3'), { rotation: 2, duration: 2.1, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 0.7)
+        .to(qLeft('.rope-seg-1'), { rotation: 10, duration: 1.0, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 0.7)
+        .to(qLeft('.rope-seg-2'), { rotation: 5, duration: 1.0, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 0.7)
+        .to(qLeft('.rope-seg-3'), { rotation: 2, duration: 1.0, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 0.7)
 
-        .to(qRight('.rope-seg-1'), { rotation: -10, duration: 2.1, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 0.7)
-        .to(qRight('.rope-seg-2'), { rotation: -5, duration: 2.1, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 0.7)
-        .to(qRight('.rope-seg-3'), { rotation: -2, duration: 2.1, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 0.7)
+        .to(qRight('.rope-seg-1'), { rotation: -10, duration: 1.0, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 0.7)
+        .to(qRight('.rope-seg-2'), { rotation: -5, duration: 1.0, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 0.7)
+        .to(qRight('.rope-seg-3'), { rotation: -2, duration: 1.0, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 0.7)
         
         // 3. Overall rope container returns to rest position relative to the moving curtain
-        .to(ropeLeftRef.current, { x: 0, duration: 8.5, ease: 'power2.inOut' }, 0.7)
-        .to(ropeRightRef.current, { x: 0, duration: 8.5, ease: 'power2.inOut' }, 0.7);
+        .to(ropeLeftRef.current, { x: 0, duration: 4.0, ease: 'power2.inOut' }, 0.7)
+        .to(ropeRightRef.current, { x: 0, duration: 4.0, ease: 'power2.inOut' }, 0.7);
 
         // Curtains start moving AFTER the ropes pull, and move much slower
         // The skew makes the top (where the rope is attached) lead the movement, while the heavy bottom drags behind!
@@ -92,14 +92,14 @@ const CurtainOpening: React.FC<CurtainOpeningProps> = ({ isOpening, onComplete, 
           x: '-105%',
           skewX: -12, // Negative skew leans left: Top leads left, bottom lags right
           scaleX: 0.95,
-          duration: 8.5, 
+          duration: 4.0, 
           ease: 'power2.inOut'
         }, 0.5)
         .to(curtainRightRef.current, {
           x: '105%',
           skewX: 12, // Positive skew leans right: Top leads right, bottom lags left
           scaleX: 0.95,
-          duration: 8.5, 
+          duration: 4.0, 
           ease: 'power2.inOut'
         }, 0.5);
 
@@ -107,9 +107,9 @@ const CurtainOpening: React.FC<CurtainOpeningProps> = ({ isOpening, onComplete, 
         tl.to([curtainLeftRef.current, curtainRightRef.current], {
           skewX: 0,
           scaleX: 1,
-          duration: 1.5,
+          duration: 1.0,
           ease: 'elastic.out(1, 0.4)' // A gentle cloth-like bounce as momentum settles
-        }, 9.0);
+        }, 4.2);
 
         // Trigger celebration effects exactly when curtains start opening
         tl.call(() => {

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import CelebrationEffects from './CelebrationEffects';
 
-import img1 from '../assets/images/image 1.jpeg';
-import img2 from '../assets/images/image 2.jpeg';
-import img3 from '../assets/images/image 3.png';
-import img4 from '../assets/images/image 4.jpeg';
+import img1 from '../assets/images/image1.jpeg';
+import img2 from '../assets/images/image2.jpeg';
+import img3 from '../assets/images/image3.jpeg';
+import img4 from '../assets/images/image4.jpeg';
 import logo from '../assets/images/logo.png';
 
 // Using standard image array as requested
@@ -15,10 +17,59 @@ const images = [
 ];
 
 interface ImageRevealProps {
-  isComplete: boolean;
+  isOpening: boolean;
 }
 
-const ImageReveal: React.FC<ImageRevealProps> = () => {
+const ImageReveal: React.FC<ImageRevealProps> = ({ isOpening }) => {
+  const [currentIndex, setCurrentIndex] = useState(-1);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const rowRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isOpening && currentIndex === -1) {
+      setCurrentIndex(0);
+    }
+  }, [isOpening, currentIndex]);
+
+  useEffect(() => {
+    if (currentIndex >= 0 && currentIndex < 4) {
+      // Fade in the image
+      if (imageRef.current) {
+        gsap.fromTo(
+          imageRef.current,
+          { opacity: 0, scale: 0.9 },
+          { opacity: 1, scale: 1, duration: 1.5, ease: 'power2.out' }
+        );
+      }
+
+      const timer = setTimeout(() => {
+        // Fade out
+        if (imageRef.current) {
+          gsap.to(imageRef.current, {
+            opacity: 0,
+            scale: 1.05,
+            duration: 1,
+            ease: 'power2.in',
+            onComplete: () => {
+              setCurrentIndex((prev) => prev + 1);
+            }
+          });
+        }
+      }, 25000);
+      return () => clearTimeout(timer);
+    } else if (currentIndex === 4) {
+      // Fade in all 4 images
+      if (rowRef.current) {
+        const children = rowRef.current.children;
+        gsap.fromTo(
+          children,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 1.5, stagger: 0.2, ease: 'power2.out' }
+        );
+      }
+    }
+  }, [currentIndex]);
+
   // Use CSS styles for responsive layout avoiding scroll
   return (
     <div 
@@ -34,27 +85,30 @@ const ImageReveal: React.FC<ImageRevealProps> = () => {
       }}
     >
       <img src={logo} alt="Logo" className="top-logo" />
-      <div className="image-reveal-row">
-        <img 
-          src={images[0]} 
-          alt="" 
-          className="ceremonial-image"
-        />
-        <img 
-          src={images[1]} 
-          alt="" 
-          className="ceremonial-image"
-        />
-        <img 
-          src={images[2]} 
-          alt="" 
-          className="ceremonial-image"
-        />
-        <img 
-          src={images[3]} 
-          alt="" 
-          className="ceremonial-image"
-        />
+
+      {currentIndex >= 0 && currentIndex <= 4 && (
+        <CelebrationEffects key={`cascade-${currentIndex}`} isActive={true} />
+      )}
+
+      <div className="image-reveal-row" ref={rowRef}>
+        {currentIndex >= 0 && currentIndex < 4 && (
+          <img 
+            ref={imageRef}
+            src={images[currentIndex]} 
+            alt={`Image ${currentIndex + 1}`} 
+            className="ceremonial-image single-view"
+            style={{ opacity: 0 }}
+          />
+        )}
+        {currentIndex === 4 && images.map((img, i) => (
+          <img 
+            key={`all-${i}`} 
+            src={img} 
+            alt={`Image ${i + 1}`} 
+            className="ceremonial-image"
+            style={{ opacity: 0 }}
+          />
+        ))}
       </div>
 
       <div className="footer-container">
