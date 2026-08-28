@@ -5,6 +5,7 @@ import ImageReveal from './components/ImageReveal';
 function App() {
   const [isOpening, setIsOpening] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   // Prevent any default touch actions just to be perfectly safe against scrolling
   useEffect(() => {
@@ -23,43 +24,26 @@ function App() {
   useEffect(() => {
     const audio = document.getElementById('bg-audio') as HTMLAudioElement | null;
     if (audio) {
-      audio.play().catch((err) => {
+      audio.play().then(() => {
+        // If auto-play actually succeeds (rare), we can skip the interceptor
+        setHasInteracted(true);
+      }).catch((err) => {
         console.warn("Browser blocked auto-play on load. A click is required.", err);
       });
     }
   }, []);
 
-  // Global listener for the very first interaction to start the audio
-  useEffect(() => {
-    const startAudio = () => {
-      const audio = document.getElementById('bg-audio') as HTMLAudioElement | null;
-      if (audio) {
-        audio.play().catch(() => {});
-      }
-      // Remove listeners once audio is started
-      document.removeEventListener('click', startAudio);
-      document.removeEventListener('touchstart', startAudio);
-      document.removeEventListener('keydown', startAudio);
-    };
-
-    document.addEventListener('click', startAudio);
-    document.addEventListener('touchstart', startAudio);
-    document.addEventListener('keydown', startAudio);
-
-    return () => {
-      document.removeEventListener('click', startAudio);
-      document.removeEventListener('touchstart', startAudio);
-      document.removeEventListener('keydown', startAudio);
-    };
-  }, []);
+  const handleFirstInteraction = () => {
+    setHasInteracted(true);
+    const audio = document.getElementById('bg-audio') as HTMLAudioElement | null;
+    if (audio) {
+      audio.play().catch(() => {});
+    }
+  };
 
   const handleStartOpening = () => {
     if (!isOpening && !isComplete) {
       setIsOpening(true);
-      const audio = document.getElementById('bg-audio') as HTMLAudioElement | null;
-      if (audio) {
-        audio.play().catch(() => {});
-      }
     }
   };
 
@@ -72,6 +56,21 @@ function App() {
       style={{ width: '100vw', height: '100dvh', overflow: 'hidden', position: 'relative' }}
     >
       <audio id="bg-audio" autoPlay loop preload="auto" src="/kec.mp3.mpeg" />
+
+      {/* Invisible overlay to capture the very first click and start the audio */}
+      {!hasInteracted && (
+        <div 
+          onClick={handleFirstInteraction}
+          onTouchStart={handleFirstInteraction}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: 9999,
+            cursor: 'pointer'
+          }}
+          title="Click to start"
+        />
+      )}
 
       <ImageReveal isComplete={isComplete} />
       
