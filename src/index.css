@@ -69,10 +69,10 @@ img {
 
 .top-logo {
   position: absolute;
-  top: -3vh;
+  top: 2vh;
   left: 50%;
   transform: translateX(-50%);
-  max-height: 25vh;
+  max-height: 15vh;
   max-width: 50vw;
   width: auto;
   height: auto;
@@ -87,14 +87,15 @@ img {
   align-items: center;
   gap: 2vw;
   width: 100%;
+  margin-top: 5vh; /* Push down slightly to avoid logo */
 }
 
 .ceremonial-image {
   object-fit: contain;
   width: auto;
   height: auto;
-  max-width: 23vw;
-  max-height: 80vh;
+  max-width: 22vw;
+  max-height: 55vh; /* Reduced to guarantee no overlap with footer/logo on 16:9 */
   border: 2px solid rgba(212, 175, 55, 0.6);
   box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(212, 175, 55, 0.15);
   border-radius: 4px;
@@ -111,10 +112,11 @@ img {
   .image-reveal-row {
     flex-direction: column;
     gap: 1.5vh;
+    margin-top: 15vh;
   }
   .ceremonial-image {
     max-width: 90vw;
-    max-height: 23vh;
+    max-height: 20vh;
   }
 }
 
@@ -127,18 +129,19 @@ img {
     flex-direction: column;
     align-items: center;
     gap: 1vh;
+    margin-top: 10vh;
   }
   .ceremonial-image {
     max-width: 96vw;
-    max-height: 23vh;
+    max-height: 20vh;
   }
 }
 
 /* Projector / Ultrawide */
 @media (min-width: 1800px) {
   .ceremonial-image {
-    max-width: 23vw;
-    max-height: 80vh;
+    max-width: 22vw;
+    max-height: 55vh;
   }
 }
 
