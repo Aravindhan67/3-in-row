@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import GoldenRope from './GoldenRope';
-import CelebrationEffects from './CelebrationEffects';
 
 interface CurtainOpeningProps {
   isOpening: boolean;
@@ -15,8 +14,6 @@ const CurtainOpening: React.FC<CurtainOpeningProps> = ({ isOpening, onComplete, 
   const curtainRightRef = useRef<HTMLDivElement>(null);
   const ropeLeftRef = useRef<HTMLDivElement>(null);
   const ropeRightRef = useRef<HTMLDivElement>(null);
-  
-  const [showEffects, setShowEffects] = useState(false);
 
   // Handle keyboard interaction
   useEffect(() => {
@@ -47,8 +44,7 @@ const CurtainOpening: React.FC<CurtainOpeningProps> = ({ isOpening, onComplete, 
       if (prefersReducedMotion) {
         tl.to([ropeLeftRef.current, ropeRightRef.current], { opacity: 0, duration: 0.1 })
           .to(curtainLeftRef.current, { x: '-100%', duration: 0.1 }, 0.1)
-          .to(curtainRightRef.current, { x: '100%', duration: 0.1 }, 0.1)
-          .call(() => setShowEffects(true), [], 0.1);
+          .to(curtainRightRef.current, { x: '100%', duration: 0.1 }, 0.1);
       } else {
         // Set transform origins for ropes
         gsap.set([ropeLeftRef.current, ropeRightRef.current], { transformOrigin: 'top center' });
@@ -110,11 +106,6 @@ const CurtainOpening: React.FC<CurtainOpeningProps> = ({ isOpening, onComplete, 
           duration: 1.0,
           ease: 'elastic.out(1, 0.4)' // A gentle cloth-like bounce as momentum settles
         }, 4.2);
-
-        // Trigger celebration effects exactly when curtains start opening
-        tl.call(() => {
-          setShowEffects(true);
-        }, [], 0.5); 
       }
     }
   }, [isOpening, onComplete]);
