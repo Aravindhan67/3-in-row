@@ -43,6 +43,9 @@ const ImageReveal: React.FC<ImageRevealProps> = ({ isOpening }) => {
         );
       }
 
+      // Give all images exactly 4 seconds of display + 1 second fade out (5 seconds total)
+      const delayTime = 4000;
+
       const timer = setTimeout(() => {
         // Fade out
         if (imageRef.current) {
@@ -56,7 +59,7 @@ const ImageReveal: React.FC<ImageRevealProps> = ({ isOpening }) => {
             }
           });
         }
-      }, 6000);
+      }, delayTime);
       return () => clearTimeout(timer);
     } else if (currentIndex === 4) {
       // Fade in all 4 images with a premium 3D entrance
