@@ -3,9 +3,10 @@ import gsap from 'gsap';
 
 interface CelebrationEffectsProps {
   isActive: boolean;
+  durationSeconds?: number;
 }
 
-const CelebrationEffects: React.FC<CelebrationEffectsProps> = ({ isActive }) => {
+const CelebrationEffects: React.FC<CelebrationEffectsProps> = ({ isActive, durationSeconds = 7 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -59,10 +60,10 @@ const CelebrationEffects: React.FC<CelebrationEffectsProps> = ({ isActive }) => 
         particleContainer.appendChild(particle);
         
         // Physics: Gentle, majestic falling with wind sway
-        const duration = 4 + Math.random() * 4; // Slow, elegant fall
+        const duration = 2.5 + Math.random() * 2.5; // Max 5s fall. With 7s delay spread, total max time is 12s, so it clears before the next image.
         
-        // Spread the spawn times continuously over the exact 8.5 seconds that the curtain is opening
-        const delay = Math.random() * 7.5; 
+        // Spread the spawn times continuously over the specified duration
+        const delay = Math.random() * durationSeconds; 
         
         // 1. Fall downwards
         gsap.to(particle, {

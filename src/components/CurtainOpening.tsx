@@ -202,7 +202,7 @@ const CurtainOpening: React.FC<CurtainOpeningProps> = ({ isOpening, onComplete, 
         <GoldenRope ropeRef={ropeRightRef} style={{ left: '5px' }} />
       </div>
       
-      <CelebrationEffects isActive={showEffects} />
+      {/* CelebrationEffects removed here because ImageReveal handles the cascade when it reveals the first image */}
     </div>
   );
 };

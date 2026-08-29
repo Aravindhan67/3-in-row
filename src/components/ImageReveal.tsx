@@ -35,6 +35,7 @@ const ImageReveal: React.FC<ImageRevealProps> = ({ isOpening }) => {
     if (currentIndex >= 0 && currentIndex < 4) {
       // Fade in the image
       if (imageRef.current) {
+        gsap.killTweensOf(imageRef.current); // ensure no old tweens are running
         gsap.fromTo(
           imageRef.current,
           { opacity: 0, scale: 0.9 },
@@ -55,7 +56,7 @@ const ImageReveal: React.FC<ImageRevealProps> = ({ isOpening }) => {
             }
           });
         }
-      }, 13000);
+      }, 6000);
       return () => clearTimeout(timer);
     } else if (currentIndex === 4) {
       // Fade in all 4 images with a premium 3D entrance
@@ -115,6 +116,7 @@ const ImageReveal: React.FC<ImageRevealProps> = ({ isOpening }) => {
       <div className="image-reveal-row" ref={rowRef}>
         {currentIndex >= 0 && currentIndex < 4 && (
           <img 
+            key={`single-${currentIndex}`} // Force React to create a new DOM element
             ref={imageRef}
             src={images[currentIndex]} 
             alt={`Image ${currentIndex + 1}`} 
